@@ -1,0 +1,28 @@
+2025-05-24 16:33:22,505 - ForexSMCBot - ERROR - Failed to initialize broker: module 'ccxt' has no attribute 'oanda'
+2025-05-24 16:34:07,837 - ForexSMCBot - ERROR - Failed to initialize broker: module 'ccxt' has no attribute 'oanda'
+2025-05-24 16:35:33,197 - ForexSMCBot - INFO - Successfully connected to zonda
+2025-05-24 16:35:33,198 - ForexSMCBot - INFO - Initialized SMC Bot for EUR/USD on zonda
+2025-05-24 16:35:33,199 - ForexSMCBot - INFO - Fetching 500 1h candles for EUR/USD
+2025-05-24 16:35:33,200 - ForexSMCBot - ERROR - Failed to fetch data: zonda does not have market symbol EUR/USD
+2025-05-24 16:39:21,643 - ForexSMCBot - INFO - Successfully connected to zonda
+2025-05-24 16:39:21,644 - ForexSMCBot - INFO - Initialized SMC Bot for BTC/PLN on zonda
+2025-05-24 16:39:21,644 - ForexSMCBot - INFO - Fetching 500 1h candles for BTC/PLN
+2025-05-24 16:39:21,988 - ForexSMCBot - INFO - Data fetched from 2025-05-03 16:00:00 to 2025-05-24 11:00:00
+2025-05-24 16:39:21,989 - ForexSMCBot - INFO - Fetching 300 5m candles for BTC/PLN
+2025-05-24 16:39:22,952 - ForexSMCBot - INFO - Data fetched from 2025-05-23 10:10:00 to 2025-05-24 11:05:00
+2025-05-24 16:39:22,953 - ForexSMCBot - INFO - Detecting market structure for HTF
+2025-05-24 16:39:23,058 - ForexSMCBot - INFO - Detecting market structure for LTF
+2025-05-24 16:39:23,089 - ForexSMCBot - INFO - Identifying order blocks...
+2025-05-24 16:39:23,090 - ForexSMCBot - INFO - Found 0 bullish and 0 bearish order blocks
+2025-05-24 16:39:23,091 - ForexSMCBot - INFO - Detecting liquidity zones...
+2025-05-24 16:42:49,549 - ForexSMCBot - INFO - Successfully connected to zonda
+2025-05-24 16:42:49,549 - ForexSMCBot - INFO - Initialized SMC Bot for BTC/PLN on zonda
+2025-05-24 16:42:49,550 - ForexSMCBot - INFO - Fetching 500 1h candles for BTC/PLN
+2025-05-24 16:42:49,906 - ForexSMCBot - INFO - Data fetched from 2025-05-03 16:00:00 to 2025-05-24 11:00:00
+2025-05-24 16:42:49,907 - ForexSMCBot - INFO - Fetching 300 5m candles for BTC/PLN
+2025-05-24 16:42:50,803 - ForexSMCBot - INFO - Data fetched from 2025-05-23 10:15:00 to 2025-05-24 11:10:00
+2025-05-24 16:42:50,804 - ForexSMCBot - INFO - Detecting market structure for HTF
+2025-05-24 16:42:50,894 - ForexSMCBot - INFO - Detecting market structure for LTF
+2025-05-24 16:42:50,926 - ForexSMCBot - INFO - Identifying order blocks...
+2025-05-24 16:42:50,926 - ForexSMCBot - INFO - Found 0 bullish and 0 bearish order blocks
+2025-05-24 16:42:50,927 - ForexSMCBot - INFO - Detecting liquidity zones...
