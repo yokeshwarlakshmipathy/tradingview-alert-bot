@@ -1,0 +1,80 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploads and media files
+uploads/
+media/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Flask
+instance/
+.webassets-cache
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Temporary files
+*.tmp
+temp/
+tmp/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Security
+*.pem
+*.key
+*.crt
+config_local.py
+secrets.json

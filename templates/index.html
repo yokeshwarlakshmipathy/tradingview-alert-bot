@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Resume Submission - Nohitatu Technologies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Nohitatu Technologies</h1>
+            <h2>Video Resume Submission</h2>
+        </header>
+
+        <div class="instructions-box">
+            <h3>📋 Instructions for Your Video Resume</h3>
+            <div class="instructions-content">
+                <p><strong>Description:</strong></p>
+                <p>Kindly record a 1 minute video answering the following points:</p>
+                <ul>
+                    <li>Introduce yourself (name, background, and area of expertise)</li>
+                    <li>What motivated you to apply for this role at Nohitatu Technologies</li>
+                    <li>Highlight your top skills or experiences relevant to the position</li>
+                    <li>Share one achievement you're most proud of</li>
+                    <li>Tell us something unique about yourself!</li>
+                </ul>
+                
+                <p><strong>Instructions for Recording:</strong></p>
+                <ul>
+                    <li>Keep it professional - follow formal attire</li>
+                    <li>Ensure good lighting, clear background and clear audio</li>
+                    <li>You can record using your phone, laptop, or webcam</li>
+                </ul>
+            </div>
+        </div>
+
+        <form id="videoResumeForm" class="submission-form">
+            <div class="form-section">
+                <h3>Personal Information</h3>
+                
+                <div class="form-group">
+                    <label for="fullName">Full Name <span class="required">*</span></label>
+                    <input type="text" id="fullName" name="full_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone_number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="googleName">Google Account Name (optional)</label>
+                    <input type="text" id="googleName" name="google_name">
+                    <small>The name associated with your Google account</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="googleEmail">Google Account Email (optional)</label>
+                    <input type="email" id="googleEmail" name="google_email">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Video Resume Upload</h3>
+                
+                <div class="form-group">
+                    <label for="videoFile">Upload your Video Resume <span class="required">*</span></label>
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="videoFile" name="video" accept="video/*" required>
+                        <div class="file-upload-info">
+                            <p>📹 Supported formats: MP4, AVI, MOV, WMV, FLV, MKV, WebM</p>
+                            <p>📊 Maximum file size: 100 MB</p>
+                        </div>
+                    </div>
+                    <div id="fileInfo" class="file-info"></div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Consent</h3>
+                
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="consent" name="consent" required>
+                        <span>
+                            By submitting this form I confirm that:<br>
+                            I consent to Nohitatu storing and reviewing my video resume for recruitment purposes. <span class="required">*</span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Submit Video Resume
+                </button>
+            </div>
+
+            <div id="statusMessage" class="status-message"></div>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
