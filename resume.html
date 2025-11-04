@@ -22,7 +22,7 @@
       font-family: "Segoe UI", Tahoma, sans-serif;
       color: var(--text-primary);
       background: var(--page-bg);
-      line-height: 1.32;
+      line-height: 1.28;
       font-size: 9.6pt;
     }
     @page { size: A4; margin: 8mm 10mm 8mm 10mm; }
@@ -35,7 +35,7 @@
       padding: 14px 16px 6px;
     }
     header {
-      padding-bottom: 10px;
+      padding-bottom: 8px;
       border-bottom: 1px solid var(--line);
       display: flex;
       flex-wrap: wrap;
@@ -74,13 +74,13 @@
     .layout {
       display: grid;
       grid-template-columns: 220px 1fr;
-      gap: 16px;
+      gap: 14px;
     }
     aside.sidebar {
-      padding-right: 14px;
+      padding-right: 12px;
       border-right: 1px solid var(--line);
     }
-    aside section { margin-bottom: 14px; }
+    aside section { margin-bottom: 12px; }
     aside section:last-child { margin-bottom: 0; }
     aside h2,
     .content h2 {
@@ -99,7 +99,7 @@
       padding: 0;
     }
     ul.contact-list li,
-    ul.info-list li { margin-bottom: 6px; font-size: 9.1pt; }
+    ul.info-list li { margin-bottom: 5px; font-size: 9.1pt; }
     ul.info-list li strong {
       display: block;
       font-weight: 600;
@@ -109,7 +109,7 @@
       color: var(--muted);
       font-size: 8.9pt;
     }
-    .content section { margin-bottom: 16px; }
+    .content section { margin-bottom: 12px; }
     .content section:last-child { margin-bottom: 0; }
     .content p {
       margin: 0 0 6px;
@@ -121,7 +121,7 @@
       padding-left: 16px;
     }
     ul.bullet-list li {
-      margin-bottom: 3px;
+      margin-bottom: 2px;
       color: var(--text-primary);
       font-size: 9.1pt;
     }
@@ -140,7 +140,7 @@
       margin: 0;
       padding: 0;
     }
-    .education-item { margin-bottom: 11px; }
+    .education-item { margin-bottom: 9px; }
     .education-item:last-child { margin-bottom: 0; }
     .education-item h3 { margin: 0; font-size: 9.4pt; }
     .education-item p {
@@ -313,15 +313,14 @@
         </aside>
 
         <section class="content">
-          <section aria-labelledby="summary-heading">
-            <h2 id="summary-heading">Professional Summary</h2>
-            <ul class="bullet-list">
-              <li>Java and Python developer specializing in scalable ML services, modernizing data pipelines with TensorFlow, PyTorch, and scikit-learn.</li>
-              <li>Designs resilient microservices with FastAPI and Django REST Framework, deploying through Docker, Kubernetes, KServe, and TensorFlow Serving.</li>
-              <li>Combines OOAD, clean code, and design patterns to deliver secure, multi-threaded backends integrated with Oracle, PostgreSQL, and enterprise messaging.</li>
-              <li>Experienced collaborating with cross-functional product, QA, and infrastructure teams; leverages shell scripting and GitHub Actions to automate SDLC workflows.</li>
-            </ul>
-          </section>
+            <section aria-labelledby="summary-heading">
+              <h2 id="summary-heading">Professional Summary</h2>
+              <ul class="bullet-list">
+                <li>Java and Python engineer delivering scalable ML microservices with TensorFlow, PyTorch, and scikit-learn for production workloads.</li>
+                <li>Builds FastAPI and Django REST APIs, packaging models with Docker, Kubernetes, KServe, and TensorFlow Serving to meet enterprise SLAs.</li>
+                <li>Applies OOAD, design patterns, Oracle/PostgreSQL integration, and shell-driven automation while partnering with product, QA, and DevOps teams.</li>
+              </ul>
+            </section>
 
           <section aria-labelledby="experience-heading">
             <h2 id="experience-heading">Work Experience</h2>
@@ -330,13 +329,12 @@
                 <h3>Software Developer Intern — ChipWave (Tm)</h3>
                 <span>Bengaluru, Karnataka, India · On-site | Aug 2025 – Present</span>
               </div>
-              <ul class="bullet-list">
-                <li>Architecting a full-stack AI platform with modular Java microservices and FastAPI gateways, ensuring secure REST/SOAP integrations with partner systems.</li>
-                <li>Implemented multi-threaded ingestion services and asynchronous event queues that reduced TensorFlow and PyTorch inference latency for RAG workloads by 28%.</li>
-                <li>Containerized ML pipelines with Docker, automated CI/CD via shell scripting and GitHub Actions, and orchestrated model rollouts on Kubernetes using KServe and TensorFlow Serving.</li>
-                <li>Applied OOAD principles and design patterns (Factory, Strategy, Observer) to standardize API contracts, improving maintainability and testability of Java components.</li>
-                <li>Collaborated with DevOps, product, and telecom BSS/OSS SMEs to align service-level objectives, implement RBAC, and ensure compliance with industry security standards.</li>
-              </ul>
+                <ul class="bullet-list">
+                  <li>Architecting modular Java microservices and FastAPI gateways for secure REST/SOAP integrations with telecom BSS/OSS partner ecosystems.</li>
+                  <li>Optimized multithreaded ingestion and async queues, cutting TensorFlow/PyTorch RAG inference latency by 28% across production workloads.</li>
+                  <li>Containerized ML pipelines, scripted CI/CD with shell + GitHub Actions, and orchestrated Kubernetes rollouts through KServe and TensorFlow Serving.</li>
+                  <li>Enforced OOAD patterns, Java Security, RBAC, and observability in collaboration with product, QA, and DevOps stakeholders.</li>
+                </ul>
             </article>
           </section>
 
@@ -347,36 +345,31 @@
                 <h3>HTML Email Design for Business Gurukula</h3>
                 <span>Freelance Project — Jan 2025</span>
               </div>
-              <ul class="bullet-list">
-                <li>Developed responsive, standards-compliant HTML email templates with modular CSS, optimized for high deliverability across major clients.</li>
-                <li>Integrated localized content pipelines with REST endpoints and shell scripts to automate client-specific deployments.</li>
-                <li>Aligned interactive CTAs with accessibility guidelines, improving click-through rates by 17% compared to baseline templates.</li>
-                <li>Delivered detailed documentation and test matrices for QA teams to validate rendering across devices and email providers.</li>
-              </ul>
+                <ul class="bullet-list">
+                  <li>Delivered responsive HTML email templates with modular CSS, REST-driven localization, and shell-scripted deployment pipelines.</li>
+                  <li>Improved accessibility and click-through rates by 17% through branded CTAs, device QA matrices, and deliverability tuning.</li>
+                </ul>
             </article>
             <article>
               <div class="role-header">
                 <h3>Animal Detection for Railway Safety Using Computer Vision</h3>
                 <span>Academic Project — Aug 2024</span>
               </div>
-              <ul class="bullet-list">
-                <li>Built a real-time detection pipeline combining YOLOv8, TensorFlow, and PyTorch experiments to safeguard railway corridors from wildlife incursions.</li>
-                <li>Deployed inference services through TensorFlow Serving and KServe on Dockerized edge gateways, enabling low-latency alerts to railway operators.</li>
-                <li>Integrated NodeMCU-based IoT modules with FastAPI webhooks and MQTT messaging to trigger automated safety workflows.</li>
-                <li>Leveraged scikit-learn for feature engineering, calibration, and evaluation under diverse environmental conditions.</li>
-              </ul>
+                <ul class="bullet-list">
+                  <li>Built real-time wildlife detection with YOLOv8, TensorFlow, and PyTorch to protect railway corridors from collisions.</li>
+                  <li>Deployed Dockerized inference via TensorFlow Serving and KServe on edge gateways, orchestrated by FastAPI webhooks.</li>
+                  <li>Integrated NodeMCU IoT signaling, MQTT alerts, and scikit-learn calibration for reliable field performance.</li>
+                </ul>
             </article>
             <article>
               <div class="role-header">
                 <h3>Ludo Game Development Using Java</h3>
                 <span>Mini Project — Apr 2022</span>
               </div>
-              <ul class="bullet-list">
-                <li>Engineered a Swing-based Ludo game with multi-threaded event handling to manage concurrent player turns and real-time UI feedback.</li>
-                <li>Implemented OOAD-driven architecture using Strategy and State patterns to encapsulate pawn logic, dice mechanics, and rule enforcement.</li>
-                <li>Persisted player profiles and game states via JDBC-backed storage, enabling replay and analytics.</li>
-                <li>Delivered JUnit test suites and static analysis checks to ensure code quality and maintainability.</li>
-              </ul>
+                <ul class="bullet-list">
+                  <li>Developed a Swing-based Ludo game with multithreaded event handling plus Strategy/State patterns for pawn and dice logic.</li>
+                  <li>Persisted game state with JDBC, backed by JUnit regression suites and static analysis enforcement.</li>
+                </ul>
             </article>
           </section>
 
