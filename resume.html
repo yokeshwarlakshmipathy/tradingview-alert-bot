@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>YOKESHWAR L — Java / Python ML Developer</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="Resume of YOKESHWAR L, Java and Python developer specializing in machine learning, FastAPI, Docker, Kubernetes, and production-grade model serving.">
+  <meta name="keywords" content="Java Developer, Python Developer, Machine Learning, TensorFlow, PyTorch, Scikit-learn, FastAPI, KServe, TensorFlow Serving, Docker, Kubernetes, OOAD, Design Patterns, Bengaluru">
+  <style>
+    :root {
+      --text-primary: #111;
+      --text-secondary: #444;
+      --muted: #666;
+      --line: #000;
+      --background: #fff;
+      --page-bg: #f3f3f3;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      color: var(--text-primary);
+      background: var(--page-bg);
+      line-height: 1.32;
+      font-size: 9.6pt;
+    }
+    @page { size: A4; margin: 8mm 10mm 8mm 10mm; }
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .resume-wrapper {
+      max-width: 780px;
+      margin: 6mm auto 2mm;
+      background: var(--background);
+      border: 1px solid var(--line);
+      padding: 14px 16px 6px;
+    }
+    header {
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 12px;
+    }
+    header .identity { flex: 1 1 260px; }
+    header h1 { margin: 0; font-size: 17pt; letter-spacing: 0.3px; }
+    header p {
+      margin: 2px 0 0;
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 9.2pt;
+    }
+    header .actions {
+      flex: 0 0 auto;
+      display: flex;
+      gap: 8px;
+    }
+    .print-button {
+      padding: 7px 14px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text-primary);
+      font-weight: 600;
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 9pt;
+    }
+    .print-button:hover,
+    .print-button:focus {
+      background: var(--text-primary);
+      color: #fff;
+    }
+    main { padding: 12px 0 4px; }
+    .layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 16px;
+    }
+    aside.sidebar {
+      padding-right: 14px;
+      border-right: 1px solid var(--line);
+    }
+    aside section { margin-bottom: 14px; }
+    aside section:last-child { margin-bottom: 0; }
+    aside h2,
+    .content h2 {
+      font-size: 9.2pt;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin: 0 0 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--line);
+    }
+    ul.contact-list,
+    ul.info-list,
+    ul.bullet-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    ul.contact-list li,
+    ul.info-list li { margin-bottom: 6px; font-size: 9.1pt; }
+    ul.info-list li strong {
+      display: block;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    ul.info-list li span {
+      color: var(--muted);
+      font-size: 8.9pt;
+    }
+    .content section { margin-bottom: 16px; }
+    .content section:last-child { margin-bottom: 0; }
+    .content p {
+      margin: 0 0 6px;
+      color: var(--text-secondary);
+      font-size: 9.2pt;
+    }
+    ul.bullet-list {
+      list-style: disc;
+      padding-left: 16px;
+    }
+    ul.bullet-list li {
+      margin-bottom: 3px;
+      color: var(--text-primary);
+      font-size: 9.1pt;
+    }
+    .role-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 4px 10px;
+      margin-bottom: 3px;
+    }
+    .role-header h3 { margin: 0; font-size: 9.4pt; }
+    .role-header span { color: var(--muted); font-size: 8.9pt; }
+    .education-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .education-item { margin-bottom: 11px; }
+    .education-item:last-child { margin-bottom: 0; }
+    .education-item h3 { margin: 0; font-size: 9.4pt; }
+    .education-item p {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 8.9pt;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:hover,
+    a:focus { text-decoration: underline; }
+    @media (max-width: 820px) {
+      html, body { font-size: 9.8pt; }
+      .resume-wrapper { margin: 6mm auto; padding: 14px; }
+      .layout { grid-template-columns: 1fr; gap: 14px; }
+      aside.sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+        padding-right: 0;
+        padding-bottom: 12px;
+      }
+      header { justify-content: space-between; }
+    }
+    @media print {
+      body { background: var(--background); }
+      .resume-wrapper { margin: 0; border: none; padding: 0; }
+      header { padding-bottom: 8px; }
+      main { padding: 10px 0 2px; }
+      .layout { grid-template-columns: 215px 1fr; gap: 12px; }
+      aside.sidebar {
+        padding-right: 12px;
+        border-right: 1px solid var(--line);
+      }
+      .print-button { display: none; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "YOKESHWAR L",
+    "email": "mailto:yokeshlakshmipathy@gmail.com",
+    "telephone": "+91 94442 16431",
+    "sameAs": [
+      "https://www.linkedin.com/in/yokeshwar-l-209376196/",
+      "https://github.com/yokeshwarlakshmipathy"
+    ],
+    "alumniOf": [
+      {
+        "@type": "EducationalOrganization",
+        "name": "Meenakshi College of Engineering, Chennai",
+        "degree": "MCA (Computer Applications)",
+        "startDate": "2022",
+        "endDate": "2024"
+      },
+      {
+        "@type": "EducationalOrganization",
+        "name": "Guru Nanak College, Chennai",
+        "degree": "BCA (Computer Applications)",
+        "startDate": "2019",
+        "endDate": "2022"
+      }
+    ],
+    "skills": [
+      "Java",
+      "Python",
+      "Shell scripting",
+      "TensorFlow",
+      "PyTorch",
+      "Scikit-learn",
+      "FastAPI",
+      "KServe",
+      "TensorFlow Serving",
+      "Docker",
+      "Kubernetes",
+      "OOAD",
+      "Design Patterns",
+      "LangChain",
+      "PostgreSQL",
+      "Oracle",
+      "MySQL"
+    ],
+    "hasPart": {
+      "@type": "Resume",
+      "name": "Professional Resume of YOKESHWAR L",
+      "about": [
+        "Java and Python backend development",
+        "ML model training and serving",
+        "Cloud-native MLOps"
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+  <div class="resume-wrapper">
+    <header>
+      <div class="identity">
+        <h1>YOKESHWAR L</h1>
+        <p>Java / Python + ML Developer</p>
+      </div>
+      <div class="actions">
+        <button type="button" class="print-button" aria-label="Download or print the resume">Download as PDF / Print</button>
+      </div>
+    </header>
+    <main>
+      <div class="layout">
+        <aside class="sidebar" role="complementary">
+          <section aria-labelledby="contact-heading">
+            <h2 id="contact-heading">Contact</h2>
+            <ul class="contact-list">
+              <li><strong>Phone</strong> <a href="tel:+919444216431">+91 94442 16431</a></li>
+              <li><strong>Email</strong> <a href="mailto:yokeshlakshmipathy@gmail.com">yokeshlakshmipathy@gmail.com</a></li>
+              <li><strong>LinkedIn</strong> <a href="https://www.linkedin.com/in/yokeshwar-l-209376196/" rel="nofollow noopener">LinkedIn</a></li>
+              <li><strong>GitHub</strong> <a href="https://github.com/yokeshwarlakshmipathy" rel="nofollow noopener">GitHub</a></li>
+            </ul>
+          </section>
+
+          <section aria-labelledby="skills-heading">
+            <h2 id="skills-heading">Technical Skills</h2>
+            <ul class="info-list">
+              <li>
+                <strong>Languages</strong>
+                <span>Java (Core, Streams, Multithreading), Python, Shell scripting, SQL</span>
+              </li>
+              <li>
+                <strong>Web & API Platforms</strong>
+                <span>FastAPI, Django REST, HTML5, CSS3, Bootstrap</span>
+              </li>
+              <li>
+                <strong>ML & MLOps</strong>
+                <span>TensorFlow, PyTorch, Scikit-learn, TensorFlow Serving, KServe, LangChain</span>
+              </li>
+              <li>
+                <strong>Containers & Cloud</strong>
+                <span>Docker, Kubernetes, GitHub Actions, AWS</span>
+              </li>
+              <li>
+                <strong>Databases</strong>
+                <span>PostgreSQL, Oracle, MySQL, JDBC</span>
+              </li>
+              <li>
+                <strong>Tools & Practices</strong>
+                <span>Git, IntelliJ, VS Code, OOAD, Design Patterns</span>
+              </li>
+            </ul>
+          </section>
+
+          <section aria-labelledby="certifications-heading">
+            <h2 id="certifications-heading">Certifications</h2>
+            <ul class="info-list">
+              <li>
+                <strong>Java Full Stack Development</strong>
+                <span>JSpiders, Bangalore — Ongoing</span>
+              </li>
+              <li>
+                <strong>Software Engineer Intern Certification</strong>
+                <span>HackerRank — May 2025</span>
+              </li>
+              <li>
+                <strong>SQL and Relational Databases 101</strong>
+                <span>IBM CognitiveClass.ai — Oct 2024</span>
+              </li>
+            </ul>
+          </section>
+        </aside>
+
+        <section class="content">
+          <section aria-labelledby="summary-heading">
+            <h2 id="summary-heading">Professional Summary</h2>
+            <p>Java and Python developer with hands-on experience delivering ML-backed products, combining Core Java multithreading, RESTful API development, and production-grade model serving.</p>
+            <p>Skilled in TensorFlow, PyTorch, and Scikit-learn for model training, and in FastAPI, TensorFlow Serving, and KServe for inference pipelines on Docker and Kubernetes.</p>
+            <p>Advocate of OOAD, design patterns, and automated CI/CD to ship resilient, cloud-ready software in cross-functional teams.</p>
+          </section>
+
+          <section aria-labelledby="experience-heading">
+            <h2 id="experience-heading">Work Experience</h2>
+            <article>
+              <div class="role-header">
+                <h3>Software Developer Intern — ChipWave (Tm)</h3>
+                <span>Bengaluru, Karnataka, India · On-site | Aug 2025 – Present</span>
+              </div>
+              <ul class="bullet-list">
+                <li>Designed containerized FastAPI services and Java microservices orchestrated with Kubernetes to deliver low-latency AI workflows.</li>
+                <li>Implemented TensorFlow and PyTorch pipelines, packaging models with TensorFlow Serving and exposing inference via KServe for scalable deployments.</li>
+                <li>Automated data preprocessing and feature engineering using Python, Scikit-learn, and Apache Airflow to accelerate experimentation cycles.</li>
+                <li>Applied OOAD and GoF patterns to modularize service components, improving code reuse and reducing production defects by 20%.</li>
+                <li>Collaborated with product and QA teams to instrument observability dashboards, enabling proactive debugging of distributed workloads.</li>
+              </ul>
+            </article>
+          </section>
+
+          <section aria-labelledby="projects-heading">
+            <h2 id="projects-heading">Projects</h2>
+            <article>
+              <div class="role-header">
+                <h3>HTML Email Design for Business Gurukula</h3>
+                <span>Freelance Project — Jan 2025</span>
+              </div>
+              <ul class="bullet-list">
+                <li>Developed a responsive HTML email template for Business Gurukula’s client, HotLunch.com, with modular JavaScript-based tracking snippets.</li>
+                <li>Ensured compatibility across major email clients and improved mobile responsiveness using custom CSS tooling.</li>
+                <li>Integrated interactive buttons and CTAs, enhancing user engagement and click-through rates.</li>
+                <li>Aligned design with branding guidelines, improving overall marketing effectiveness.</li>
+              </ul>
+            </article>
+            <article>
+              <div class="role-header">
+                <h3>Animal Detection for Railway Safety Using Computer Vision</h3>
+                <span>Academic Project — Aug 2024</span>
+              </div>
+              <ul class="bullet-list">
+                <li>Built a real-time animal detection pipeline combining TensorFlow object detection with YOLOv8 experimentation to prevent railway collisions.</li>
+                <li>Packaged inference workloads into Docker containers and simulated deployment on Raspberry Pi gateways connected via MQTT.</li>
+                <li>Integrated IoT with NodeMCU for real-time alerts to train personnel and authorities, exposing REST webhooks for control systems.</li>
+                <li>Automated train speed adjustment upon detection to enhance safety and created test harnesses using Python and OpenCV.</li>
+                <li>Validated model accuracy across diverse environmental conditions with Scikit-learn evaluation scripts.</li>
+              </ul>
+            </article>
+            <article>
+              <div class="role-header">
+                <h3>Ludo Game Development Using Java</h3>
+                <span>Mini Project — Apr 2022</span>
+              </div>
+              <ul class="bullet-list">
+                <li>Developed a Java-based Ludo game using Swing, implementing a fully interactive UI and multithreaded game loop.</li>
+                <li>Applied OOAD principles and strategy patterns to cleanly separate player logic, pawn state, and board rules.</li>
+                <li>Handled pawn movement and collisions using a pre-defined path stored in 2D arrays and synchronized collections.</li>
+                <li>Added winning condition logic with unit tests executed via JUnit to guard against regression bugs.</li>
+              </ul>
+            </article>
+          </section>
+
+          <section aria-labelledby="education-heading">
+            <h2 id="education-heading">Education</h2>
+            <div class="education-list">
+              <div class="education-item">
+                <h3>Meenakshi College of Engineering, Chennai</h3>
+                <p>MCA — Computer Applications | CGPA: 7.92 | 2022 – 2024</p>
+              </div>
+              <div class="education-item">
+                <h3>Guru Nanak College, Chennai</h3>
+                <p>BCA — Computer Applications | CGPA: 7.80 | 2019 – 2022</p>
+              </div>
+            </div>
+          </section>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const button = document.querySelector('.print-button');
+      if (button) {
+        const handlePrint = function () { window.print(); };
+        button.addEventListener('click', handlePrint);
+        button.addEventListener('keyup', function (event) {
+          if (event.key === 'Enter' || event.key === ' ') { handlePrint(); }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
