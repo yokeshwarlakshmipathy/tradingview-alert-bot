@@ -7,6 +7,10 @@
 #include <Trade/Trade.mqh>
 #include <Trade/PositionInfo.mqh>
 
+#ifndef ACCOUNT_TRADE_MODE_DISABLED
+   #define ACCOUNT_TRADE_MODE_DISABLED 0
+#endif
+
 enum TrendBias
 {
    TREND_NONE = 0,
@@ -485,17 +489,17 @@ bool DXYFilterAllows()
 int PositionsTotalByMagic()
 {
    int total = 0;
-   int positions_total = (int)PositionsTotal();
-   for(int i = positions_total - 1; i >= 0; i--)
+   int count = (int)PositionsTotal();
+   for(int idx = count - 1; idx >= 0; idx--)
    {
-      if(!::PositionSelectByIndex(i))
+      if(!PositionSelectByIndex(idx))
          continue;
 
-      string pos_symbol = ::PositionGetString(POSITION_SYMBOL);
+      string pos_symbol = PositionGetString(POSITION_SYMBOL);
       if(pos_symbol != _Symbol)
          continue;
 
-      if(::PositionGetInteger(POSITION_MAGIC) == (long)InpMagicNumber)
+      if(PositionGetInteger(POSITION_MAGIC) == (long)InpMagicNumber)
          total++;
    }
    return(total);
@@ -775,25 +779,25 @@ double CalculateVolume(double stop_points)
 //+------------------------------------------------------------------+
 void ManageOpenPositions()
 {
-   int total = (int)PositionsTotal();
-   for(int i = total - 1; i >= 0; i--)
+   int count = (int)PositionsTotal();
+   for(int idx = count - 1; idx >= 0; idx--)
    {
-      if(!::PositionSelectByIndex(i))
+      if(!PositionSelectByIndex(idx))
          continue;
 
-      string pos_symbol = ::PositionGetString(POSITION_SYMBOL);
+      string pos_symbol = PositionGetString(POSITION_SYMBOL);
       if(pos_symbol != _Symbol)
          continue;
 
-      if(::PositionGetInteger(POSITION_MAGIC) != (long)InpMagicNumber)
+      if(PositionGetInteger(POSITION_MAGIC) != (long)InpMagicNumber)
          continue;
 
-      ulong ticket = ::PositionGetInteger(POSITION_TICKET);
-      double open_price = ::PositionGetDouble(POSITION_PRICE_OPEN);
-      double stop_loss = ::PositionGetDouble(POSITION_SL);
-      double volume = ::PositionGetDouble(POSITION_VOLUME);
-      long type = ::PositionGetInteger(POSITION_TYPE);
-      double tp_price = ::PositionGetDouble(POSITION_TP);
+      ulong ticket = PositionGetInteger(POSITION_TICKET);
+      double open_price = PositionGetDouble(POSITION_PRICE_OPEN);
+      double stop_loss = PositionGetDouble(POSITION_SL);
+      double volume = PositionGetDouble(POSITION_VOLUME);
+      long type = PositionGetInteger(POSITION_TYPE);
+      double tp_price = PositionGetDouble(POSITION_TP);
 
       double risk_points = 0.0;
 
@@ -866,7 +870,7 @@ void ManageOpenPositions()
 
          desired_sl = NormalizeDouble(desired_sl, digits);
 
-         double current_sl = ::PositionGetDouble(POSITION_SL);
+         double current_sl = PositionGetDouble(POSITION_SL);
 
          if((type == POSITION_TYPE_BUY && desired_sl > current_sl && desired_sl > g_position_states[state_index].last_trail_price) ||
             (type == POSITION_TYPE_SELL && desired_sl < current_sl && desired_sl < g_position_states[state_index].last_trail_price))
@@ -926,7 +930,7 @@ int HandlePositionState(ulong ticket)
 
    if(g_position_states[idx].last_trail_price == 0.0)
    {
-      double sl = ::PositionGetDouble(POSITION_SL);
+      double sl = PositionGetDouble(POSITION_SL);
       g_position_states[idx].last_trail_price = sl;
    }
 
@@ -989,17 +993,17 @@ void RefreshPanel()
 //+------------------------------------------------------------------+
 void CloseAllPositions()
 {
-   int total = (int)PositionsTotal();
-   for(int i = total - 1; i >= 0; i--)
+   int count = (int)PositionsTotal();
+   for(int idx = count - 1; idx >= 0; idx--)
    {
-      if(!::PositionSelectByIndex(i))
+      if(!PositionSelectByIndex(idx))
          continue;
 
-      string pos_symbol = ::PositionGetString(POSITION_SYMBOL);
+      string pos_symbol = PositionGetString(POSITION_SYMBOL);
       if(pos_symbol != _Symbol)
          continue;
 
-      if(::PositionGetInteger(POSITION_MAGIC) != (long)InpMagicNumber)
+      if(PositionGetInteger(POSITION_MAGIC) != (long)InpMagicNumber)
          continue;
 
       g_trade.PositionClose(pos_symbol);
