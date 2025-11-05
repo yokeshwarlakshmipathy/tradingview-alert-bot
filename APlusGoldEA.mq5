@@ -5,6 +5,7 @@
 #property description "A+ Gold Prop-Firm Strategy EA"
 
 #include <Trade/Trade.mqh>
+#include <Object.mqh>
 #include <Arrays/ArrayObj.mqh>
 
 enum TrendBias
@@ -80,6 +81,7 @@ int      g_trades_today = 0;
 string   g_panel_name = "APlusGoldPanel";
 
 //--- forward declarations
+void ClearPositionStates();
 void ResetDailyStats();
 void ResetWeeklyStats();
 void UpdateEquityStats();
@@ -103,6 +105,20 @@ void CloseAllPositions();
 double GetDailyPLPercent();
 double GetWeeklyPLPercent();
 double GetDrawdownPercent();
+
+//+------------------------------------------------------------------+
+//| Helpers                                                          |
+//+------------------------------------------------------------------+
+void ClearPositionStates()
+{
+   for(int i = g_position_states.Total() - 1; i >= 0; i--)
+   {
+      CPositionState *state = (CPositionState*)g_position_states.At(i);
+      if(CheckPointer(state))
+         delete state;
+   }
+   g_position_states.Clear();
+}
 
 //+------------------------------------------------------------------+
 //| Expert initialization function                                   |
@@ -146,7 +162,7 @@ int OnInit()
       return(INIT_FAILED);
    }
 
-   g_position_states.Clear(true);
+   ClearPositionStates();
 
    g_peak_equity = AccountInfoDouble(ACCOUNT_EQUITY);
    ResetDailyStats();
@@ -172,7 +188,7 @@ void OnDeinit(const int reason)
 
    ObjectDelete(0, g_panel_name);
 
-   g_position_states.Clear(true);
+   ClearPositionStates();
 }
 
 //+------------------------------------------------------------------+
@@ -408,21 +424,21 @@ bool IsWithinSession()
 //+------------------------------------------------------------------+
 bool IsAllowedSymbol(const string symbol)
 {
-   string list = StringUpper(InpAllowedSymbols);
-   string symb = StringUpper(symbol);
-
+   string list = StringToUpper(InpAllowedSymbols);
    StringReplace(list, " ", "");
 
-   int pos = StringFind(list, symb);
-   if(pos == -1)
+   string allowed[];
+   int count = StringSplit(list, ',', allowed);
+   if(count <= 0)
       return(false);
 
-   // Ensure exact match within comma-separated list
-   bool start_ok = (pos == 0) || (StringGetCharacter(list, pos - 1) == ',');
-   int end_index = pos + StringLen(symb);
-   bool end_ok = (end_index == StringLen(list)) || (StringGetCharacter(list, end_index) == ',');
-
-   return(start_ok && end_ok);
+   string target = StringToUpper(symbol);
+   for(int i = 0; i < count; i++)
+   {
+      if(allowed[i] == target)
+         return(true);
+   }
+   return(false);
 }
 
 //+------------------------------------------------------------------+
@@ -730,7 +746,13 @@ double CalculateVolume(double stop_points)
    if(volume > max_lot)
       volume = max_lot;
 
-   volume = NormalizeDouble(volume, (int)SymbolInfoInteger(_Symbol, SYMBOL_VOLUME_DIGITS));
+   int volume_digits = 0;
+   if(lot_step > 0.0)
+   {
+      double step_log = MathLog10(lot_step);
+      volume_digits = (int)MathRound(MathMax(0.0, -step_log));
+   }
+   volume = NormalizeDouble(volume, volume_digits);
 
    return(volume);
 }
@@ -794,7 +816,7 @@ void ManageOpenPositions()
 
          new_sl = NormalizeDouble(new_sl, digits);
 
-         if(g_trade.PositionModify(ticket, new_sl, tp_price))
+         if(g_trade.PositionModify(_Symbol, new_sl, tp_price))
          {
             state->breakeven_done = true;
             PrintFormat("[Manage] Position %I64u moved to break-even at %.2f", ticket, new_sl);
@@ -807,10 +829,12 @@ void ManageOpenPositions()
          double close_volume = volume * (InpPartialClosePercent / 100.0);
          double min_vol = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN);
          double step_vol = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_STEP);
+         if(step_vol <= 0.0)
+            step_vol = min_vol;
          close_volume = MathFloor(close_volume / step_vol) * step_vol;
          if(close_volume >= min_vol && close_volume < volume)
          {
-            if(g_trade.PositionClosePartial(ticket, close_volume))
+            if(g_trade.PositionClosePartial(_Symbol, close_volume))
             {
                state->partial_done = true;
                PrintFormat("[Manage] Partial close %.2f lots on position %I64u", close_volume, ticket);
@@ -836,7 +860,7 @@ void ManageOpenPositions()
          if((type == POSITION_TYPE_BUY && desired_sl > current_sl && desired_sl > state->last_trail_price) ||
             (type == POSITION_TYPE_SELL && desired_sl < current_sl && desired_sl < state->last_trail_price))
          {
-            if(g_trade.PositionModify(ticket, desired_sl, tp_price))
+            if(g_trade.PositionModify(_Symbol, desired_sl, tp_price))
             {
                state->last_trail_price = desired_sl;
                PrintFormat("[Manage] Trailing stop adjusted for position %I64u to %.2f", ticket, desired_sl);
@@ -882,7 +906,11 @@ CPositionState* GetPositionState(const ulong ticket, const bool create_if_missin
       return(NULL);
 
    state->ticket = ticket;
-   g_position_states.Add(state);
+   if(!g_position_states.Add(state))
+   {
+      delete state;
+      return(NULL);
+   }
    return(state);
 }
 
@@ -899,7 +927,7 @@ void RemovePositionState(const ulong ticket)
       if(state->ticket == ticket)
       {
          delete state;
-         g_position_states.Delete(i);
+         g_position_states.Remove(i);
       }
    }
 }
@@ -965,8 +993,7 @@ void CloseAllPositions()
       if(PositionGetInteger(POSITION_MAGIC) != (long)InpMagicNumber)
          continue;
 
-      ulong ticket = PositionGetInteger(POSITION_TICKET);
-      g_trade.PositionClose(ticket);
+      g_trade.PositionClose(pos_symbol);
    }
 }
 
