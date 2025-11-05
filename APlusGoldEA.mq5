@@ -353,7 +353,7 @@ void UpdateEquityStats()
    MqlDateTime dt_daily;
    TimeToStruct(g_daily_reset_gmt, dt_daily);
 
-   if(dt_now.year != dt_daily.year || dt_now.yday != dt_daily.yday)
+   if(dt_now.year != dt_daily.year || dt_now.day_of_year != dt_daily.day_of_year)
       ResetDailyStats();
 
    if(g_weekly_reset_gmt == 0 || now_gmt - g_weekly_reset_gmt >= 7 * 24 * 60 * 60)
@@ -488,14 +488,14 @@ int PositionsTotalByMagic()
    int positions_total = (int)PositionsTotal();
    for(int i = positions_total - 1; i >= 0; i--)
    {
-      if(!PositionSelectByIndex(i))
+      if(!::PositionSelectByIndex(i))
          continue;
 
-      string pos_symbol = PositionGetString(POSITION_SYMBOL);
+      string pos_symbol = ::PositionGetString(POSITION_SYMBOL);
       if(pos_symbol != _Symbol)
          continue;
 
-      if(PositionGetInteger(POSITION_MAGIC) == (long)InpMagicNumber)
+      if(::PositionGetInteger(POSITION_MAGIC) == (long)InpMagicNumber)
          total++;
    }
    return(total);
@@ -778,22 +778,22 @@ void ManageOpenPositions()
    int total = (int)PositionsTotal();
    for(int i = total - 1; i >= 0; i--)
    {
-      if(!PositionSelectByIndex(i))
+      if(!::PositionSelectByIndex(i))
          continue;
 
-      string pos_symbol = PositionGetString(POSITION_SYMBOL);
+      string pos_symbol = ::PositionGetString(POSITION_SYMBOL);
       if(pos_symbol != _Symbol)
          continue;
 
-      if(PositionGetInteger(POSITION_MAGIC) != (long)InpMagicNumber)
+      if(::PositionGetInteger(POSITION_MAGIC) != (long)InpMagicNumber)
          continue;
 
-      ulong ticket = PositionGetInteger(POSITION_TICKET);
-      double open_price = PositionGetDouble(POSITION_PRICE_OPEN);
-      double stop_loss = PositionGetDouble(POSITION_SL);
-      double volume = PositionGetDouble(POSITION_VOLUME);
-      long type = PositionGetInteger(POSITION_TYPE);
-      double tp_price = PositionGetDouble(POSITION_TP);
+      ulong ticket = ::PositionGetInteger(POSITION_TICKET);
+      double open_price = ::PositionGetDouble(POSITION_PRICE_OPEN);
+      double stop_loss = ::PositionGetDouble(POSITION_SL);
+      double volume = ::PositionGetDouble(POSITION_VOLUME);
+      long type = ::PositionGetInteger(POSITION_TYPE);
+      double tp_price = ::PositionGetDouble(POSITION_TP);
 
       double risk_points = 0.0;
 
@@ -866,7 +866,7 @@ void ManageOpenPositions()
 
          desired_sl = NormalizeDouble(desired_sl, digits);
 
-         double current_sl = PositionGetDouble(POSITION_SL);
+         double current_sl = ::PositionGetDouble(POSITION_SL);
 
          if((type == POSITION_TYPE_BUY && desired_sl > current_sl && desired_sl > g_position_states[state_index].last_trail_price) ||
             (type == POSITION_TYPE_SELL && desired_sl < current_sl && desired_sl < g_position_states[state_index].last_trail_price))
@@ -926,7 +926,7 @@ int HandlePositionState(ulong ticket)
 
    if(g_position_states[idx].last_trail_price == 0.0)
    {
-      double sl = PositionGetDouble(POSITION_SL);
+      double sl = ::PositionGetDouble(POSITION_SL);
       g_position_states[idx].last_trail_price = sl;
    }
 
@@ -992,14 +992,14 @@ void CloseAllPositions()
    int total = (int)PositionsTotal();
    for(int i = total - 1; i >= 0; i--)
    {
-      if(!PositionSelectByIndex(i))
+      if(!::PositionSelectByIndex(i))
          continue;
 
-      string pos_symbol = PositionGetString(POSITION_SYMBOL);
+      string pos_symbol = ::PositionGetString(POSITION_SYMBOL);
       if(pos_symbol != _Symbol)
          continue;
 
-      if(PositionGetInteger(POSITION_MAGIC) != (long)InpMagicNumber)
+      if(::PositionGetInteger(POSITION_MAGIC) != (long)InpMagicNumber)
          continue;
 
       g_trade.PositionClose(pos_symbol);
@@ -1050,7 +1050,7 @@ bool IsTradeAllowed()
    if(!TerminalInfoInteger(TERMINAL_TRADE_ALLOWED) || !MQLInfoInteger(MQL_TRADE_ALLOWED))
       return(false);
 
-   ENUM_ACCOUNT_TRADE_MODE trade_mode = (ENUM_ACCOUNT_TRADE_MODE)AccountInfoInteger(ACCOUNT_TRADE_MODE);
+   long trade_mode = AccountInfoInteger(ACCOUNT_TRADE_MODE);
    if(trade_mode == ACCOUNT_TRADE_MODE_DISABLED)
       return(false);
 
