@@ -5,8 +5,6 @@
 #property description "A+ Gold Prop-Firm Strategy EA"
 
 #include <Trade/Trade.mqh>
-#include <Object.mqh>
-#include <Arrays/ArrayObj.mqh>
 
 enum TrendBias
 {
@@ -15,15 +13,22 @@ enum TrendBias
    TREND_BEAR = -1
 };
 
-class CPositionState : public CObject
+struct PositionState
 {
-public:
+   bool   active;
    ulong  ticket;
    bool   partial_done;
    bool   breakeven_done;
    double last_trail_price;
 
-   CPositionState(): ticket(0), partial_done(false), breakeven_done(false), last_trail_price(0.0) {}
+   void Clear()
+   {
+      active = false;
+      ticket = 0;
+      partial_done = false;
+      breakeven_done = false;
+      last_trail_price = 0.0;
+   }
 };
 
 //--- inputs
@@ -61,8 +66,9 @@ input string           InpPanelFont            = "Arial";       // Panel font
 input int              InpPanelFontSize        = 10;             // Panel font size
 
 //--- globals
+const int        MAX_POSITION_STATES = 16;
 CTrade           g_trade;
-CArrayObj        g_position_states;
+PositionState    g_position_states[MAX_POSITION_STATES];
 
 int      g_handle_fast = INVALID_HANDLE;
 int      g_handle_slow = INVALID_HANDLE;
@@ -98,7 +104,7 @@ bool FindSwingLevels(bool bullish, double &swing_high, double &swing_low);
 double CalculateVolume(double stop_points);
 void ManageOpenPositions();
 void HandlePositionState(ulong ticket);
-CPositionState* GetPositionState(const ulong ticket, const bool create_if_missing);
+PositionState* GetPositionState(const ulong ticket, const bool create_if_missing);
 void RemovePositionState(const ulong ticket);
 void RefreshPanel();
 void CloseAllPositions();
@@ -111,13 +117,8 @@ double GetDrawdownPercent();
 //+------------------------------------------------------------------+
 void ClearPositionStates()
 {
-   for(int i = g_position_states.Total() - 1; i >= 0; i--)
-   {
-      CPositionState *state = (CPositionState*)g_position_states.At(i);
-      if(CheckPointer(state))
-         delete state;
-   }
-   g_position_states.Clear();
+   for(int i = 0; i < MAX_POSITION_STATES; i++)
+      g_position_states[i].Clear();
 }
 
 //+------------------------------------------------------------------+
@@ -424,7 +425,8 @@ bool IsWithinSession()
 //+------------------------------------------------------------------+
 bool IsAllowedSymbol(const string symbol)
 {
-   string list = StringToUpper(InpAllowedSymbols);
+   string list = InpAllowedSymbols;
+   StringToUpper(list);
    StringReplace(list, " ", "");
 
    string allowed[];
@@ -432,9 +434,11 @@ bool IsAllowedSymbol(const string symbol)
    if(count <= 0)
       return(false);
 
-   string target = StringToUpper(symbol);
+   string target = symbol;
+   StringToUpper(target);
    for(int i = 0; i < count; i++)
    {
+      StringToUpper(allowed[i]);
       if(allowed[i] == target)
          return(true);
    }
@@ -749,8 +753,12 @@ double CalculateVolume(double stop_points)
    int volume_digits = 0;
    if(lot_step > 0.0)
    {
-      double step_log = MathLog10(lot_step);
-      volume_digits = (int)MathRound(MathMax(0.0, -step_log));
+      double step_tmp = lot_step;
+      while(step_tmp < 1.0 && volume_digits < 8)
+      {
+         step_tmp *= 10.0;
+         volume_digits++;
+      }
    }
    volume = NormalizeDouble(volume, volume_digits);
 
@@ -794,7 +802,7 @@ void ManageOpenPositions()
 
       HandlePositionState(ticket);
 
-      CPositionState *state = GetPositionState(ticket, true);
+      PositionState *state = GetPositionState(ticket, true);
       if(state == NULL)
          continue;
 
@@ -875,7 +883,7 @@ void ManageOpenPositions()
 //+------------------------------------------------------------------+
 void HandlePositionState(ulong ticket)
 {
-   CPositionState *state = GetPositionState(ticket, true);
+   PositionState *state = GetPositionState(ticket, true);
    if(state == NULL)
       return;
 
@@ -889,29 +897,33 @@ void HandlePositionState(ulong ticket)
 //+------------------------------------------------------------------+
 //| Retrieve or create position state                                |
 //+------------------------------------------------------------------+
-CPositionState* GetPositionState(const ulong ticket, const bool create_if_missing)
+PositionState* GetPositionState(const ulong ticket, const bool create_if_missing)
 {
-   for(int i = 0; i < g_position_states.Total(); i++)
+   for(int i = 0; i < MAX_POSITION_STATES; i++)
    {
-      CPositionState *state = (CPositionState*)g_position_states.At(i);
-      if(CheckPointer(state) && state->ticket == ticket)
-         return(state);
+      if(g_position_states[i].active && g_position_states[i].ticket == ticket)
+         return(&g_position_states[i]);
    }
 
    if(!create_if_missing)
       return(NULL);
 
-   CPositionState *state = new CPositionState();
-   if(state == NULL)
-      return(NULL);
-
-   state->ticket = ticket;
-   if(!g_position_states.Add(state))
+   for(int i = 0; i < MAX_POSITION_STATES; i++)
    {
-      delete state;
-      return(NULL);
+      if(!g_position_states[i].active)
+      {
+         g_position_states[i].Clear();
+         g_position_states[i].active = true;
+         g_position_states[i].ticket = ticket;
+         return(&g_position_states[i]);
+      }
    }
-   return(state);
+
+   // fallback: reuse first slot
+   g_position_states[0].Clear();
+   g_position_states[0].active = true;
+   g_position_states[0].ticket = ticket;
+   return(&g_position_states[0]);
 }
 
 //+------------------------------------------------------------------+
@@ -919,15 +931,12 @@ CPositionState* GetPositionState(const ulong ticket, const bool create_if_missin
 //+------------------------------------------------------------------+
 void RemovePositionState(const ulong ticket)
 {
-   for(int i = g_position_states.Total() - 1; i >= 0; i--)
+   for(int i = 0; i < MAX_POSITION_STATES; i++)
    {
-      CPositionState *state = (CPositionState*)g_position_states.At(i);
-      if(!CheckPointer(state))
-         continue;
-      if(state->ticket == ticket)
+      if(g_position_states[i].active && g_position_states[i].ticket == ticket)
       {
-         delete state;
-         g_position_states.Remove(i);
+         g_position_states[i].Clear();
+         break;
       }
    }
 }
