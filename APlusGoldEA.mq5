@@ -66,7 +66,7 @@ input string           InpPanelFont            = "Arial";       // Panel font
 input int              InpPanelFontSize        = 10;             // Panel font size
 
 //--- globals
-const int        MAX_POSITION_STATES = 16;
+#define MAX_POSITION_STATES 16
 CTrade           g_trade;
 PositionState    g_position_states[MAX_POSITION_STATES];
 
@@ -103,8 +103,9 @@ bool DetectEngulfing(TrendBias trend);
 bool FindSwingLevels(bool bullish, double &swing_high, double &swing_low);
 double CalculateVolume(double stop_points);
 void ManageOpenPositions();
-void HandlePositionState(ulong ticket);
-PositionState* GetPositionState(const ulong ticket, const bool create_if_missing);
+int  HandlePositionState(ulong ticket);
+int  GetPositionStateIndex(const ulong ticket, const bool create_if_missing);
+int  FindPositionStateIndex(const ulong ticket);
 void RemovePositionState(const ulong ticket);
 void RefreshPanel();
 void CloseAllPositions();
@@ -800,10 +801,8 @@ void ManageOpenPositions()
       if(risk_points <= 0.0)
          continue;
 
-      HandlePositionState(ticket);
-
-      PositionState *state = GetPositionState(ticket, true);
-      if(state == NULL)
+      int state_index = HandlePositionState(ticket);
+      if(state_index < 0)
          continue;
 
       double current_price = (type == POSITION_TYPE_BUY) ? SymbolInfoDouble(_Symbol, SYMBOL_BID)
@@ -817,7 +816,7 @@ void ManageOpenPositions()
       int digits = (int)SymbolInfoInteger(_Symbol, SYMBOL_DIGITS);
 
       // Break-even adjustment
-      if(InpEnableBreakEven && !state->breakeven_done && rr >= InpBreakEvenRR)
+      if(InpEnableBreakEven && !g_position_states[state_index].breakeven_done && rr >= InpBreakEvenRR)
       {
          double new_sl = (type == POSITION_TYPE_BUY) ? open_price + (_Point * 2.0)
                                                      : open_price - (_Point * 2.0);
@@ -826,13 +825,13 @@ void ManageOpenPositions()
 
          if(g_trade.PositionModify(_Symbol, new_sl, tp_price))
          {
-            state->breakeven_done = true;
+            g_position_states[state_index].breakeven_done = true;
             PrintFormat("[Manage] Position %I64u moved to break-even at %.2f", ticket, new_sl);
          }
       }
 
       // Partial close
-      if(!state->partial_done && rr >= InpPartialCloseRR && InpPartialClosePercent > 0.0)
+      if(!g_position_states[state_index].partial_done && rr >= InpPartialCloseRR && InpPartialClosePercent > 0.0)
       {
          double close_volume = volume * (InpPartialClosePercent / 100.0);
          double min_vol = SymbolInfoDouble(_Symbol, SYMBOL_VOLUME_MIN);
@@ -844,7 +843,7 @@ void ManageOpenPositions()
          {
             if(g_trade.PositionClosePartial(_Symbol, close_volume))
             {
-               state->partial_done = true;
+               g_position_states[state_index].partial_done = true;
                PrintFormat("[Manage] Partial close %.2f lots on position %I64u", close_volume, ticket);
             }
          }
@@ -865,12 +864,12 @@ void ManageOpenPositions()
 
          double current_sl = PositionGetDouble(POSITION_SL);
 
-         if((type == POSITION_TYPE_BUY && desired_sl > current_sl && desired_sl > state->last_trail_price) ||
-            (type == POSITION_TYPE_SELL && desired_sl < current_sl && desired_sl < state->last_trail_price))
+         if((type == POSITION_TYPE_BUY && desired_sl > current_sl && desired_sl > g_position_states[state_index].last_trail_price) ||
+            (type == POSITION_TYPE_SELL && desired_sl < current_sl && desired_sl < g_position_states[state_index].last_trail_price))
          {
             if(g_trade.PositionModify(_Symbol, desired_sl, tp_price))
             {
-               state->last_trail_price = desired_sl;
+               g_position_states[state_index].last_trail_price = desired_sl;
                PrintFormat("[Manage] Trailing stop adjusted for position %I64u to %.2f", ticket, desired_sl);
             }
          }
@@ -879,34 +878,23 @@ void ManageOpenPositions()
 }
 
 //+------------------------------------------------------------------+
-//| Ensure position state exists                                     |
+//| Position state helpers                                           |
 //+------------------------------------------------------------------+
-void HandlePositionState(ulong ticket)
-{
-   PositionState *state = GetPositionState(ticket, true);
-   if(state == NULL)
-      return;
-
-   if(state->last_trail_price == 0.0)
-   {
-      double sl = PositionGetDouble(POSITION_SL);
-      state->last_trail_price = sl;
-   }
-}
-
-//+------------------------------------------------------------------+
-//| Retrieve or create position state                                |
-//+------------------------------------------------------------------+
-PositionState* GetPositionState(const ulong ticket, const bool create_if_missing)
+int FindPositionStateIndex(const ulong ticket)
 {
    for(int i = 0; i < MAX_POSITION_STATES; i++)
    {
       if(g_position_states[i].active && g_position_states[i].ticket == ticket)
-         return(&g_position_states[i]);
+         return(i);
    }
+   return(-1);
+}
 
-   if(!create_if_missing)
-      return(NULL);
+int GetPositionStateIndex(const ulong ticket, const bool create_if_missing)
+{
+   int idx = FindPositionStateIndex(ticket);
+   if(idx != -1 || !create_if_missing)
+      return(idx);
 
    for(int i = 0; i < MAX_POSITION_STATES; i++)
    {
@@ -915,30 +903,37 @@ PositionState* GetPositionState(const ulong ticket, const bool create_if_missing
          g_position_states[i].Clear();
          g_position_states[i].active = true;
          g_position_states[i].ticket = ticket;
-         return(&g_position_states[i]);
+         return(i);
       }
    }
 
-   // fallback: reuse first slot
+   // Fallback: reuse first slot
    g_position_states[0].Clear();
    g_position_states[0].active = true;
    g_position_states[0].ticket = ticket;
-   return(&g_position_states[0]);
+   return(0);
 }
 
-//+------------------------------------------------------------------+
-//| Remove position state                                            |
-//+------------------------------------------------------------------+
+int HandlePositionState(ulong ticket)
+{
+   int idx = GetPositionStateIndex(ticket, true);
+   if(idx < 0)
+      return(-1);
+
+   if(g_position_states[idx].last_trail_price == 0.0)
+   {
+      double sl = PositionGetDouble(POSITION_SL);
+      g_position_states[idx].last_trail_price = sl;
+   }
+
+   return(idx);
+}
+
 void RemovePositionState(const ulong ticket)
 {
-   for(int i = 0; i < MAX_POSITION_STATES; i++)
-   {
-      if(g_position_states[i].active && g_position_states[i].ticket == ticket)
-      {
-         g_position_states[i].Clear();
-         break;
-      }
-   }
+   int idx = FindPositionStateIndex(ticket);
+   if(idx != -1)
+      g_position_states[idx].Clear();
 }
 
 //+------------------------------------------------------------------+
