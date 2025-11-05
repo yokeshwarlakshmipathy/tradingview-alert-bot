@@ -5,6 +5,7 @@
 #property description "A+ Gold Prop-Firm Strategy EA"
 
 #include <Trade/Trade.mqh>
+#include <Trade/PositionInfo.mqh>
 
 enum TrendBias
 {
@@ -266,45 +267,47 @@ void OnTick()
 //+------------------------------------------------------------------+
 void OnTradeTransaction(const MqlTradeTransaction &trans, const MqlTradeRequest &request, const MqlTradeResult &result)
 {
-   if(trans.type == TRADE_TRANSACTION_DEAL_ADD)
+   if(trans.type != TRADE_TRANSACTION_DEAL_ADD)
+      return;
+
+   if(!HistoryDealSelect(trans.deal))
+      return;
+
+   long deal_magic = HistoryDealGetInteger(trans.deal, DEAL_MAGIC);
+   if(deal_magic != (long)InpMagicNumber)
+      return;
+
+   int entry_type = (int)HistoryDealGetInteger(trans.deal, DEAL_ENTRY);
+   ulong position_id = (ulong)HistoryDealGetInteger(trans.deal, DEAL_POSITION_ID);
+
+   if(entry_type == DEAL_ENTRY_OUT)
    {
-      if(trans.magic != (long)InpMagicNumber)
-         return;
+      double profit = HistoryDealGetDouble(trans.deal, DEAL_PROFIT) +
+                      HistoryDealGetDouble(trans.deal, DEAL_COMMISSION) +
+                      HistoryDealGetDouble(trans.deal, DEAL_SWAP);
 
-      if(!HistoryDealSelect(trans.deal))
-         return;
+      bool position_open = PositionSelectByTicket(position_id);
 
-      int entry_type = (int)HistoryDealGetInteger(trans.deal, DEAL_ENTRY);
-
-      if(entry_type == DEAL_ENTRY_OUT)
+      if(!position_open)
       {
-         double profit = HistoryDealGetDouble(trans.deal, DEAL_PROFIT) +
-                         HistoryDealGetDouble(trans.deal, DEAL_COMMISSION) +
-                         HistoryDealGetDouble(trans.deal, DEAL_SWAP);
+         RemovePositionState(position_id);
 
-         bool position_open = PositionSelectByTicket(trans.position);
-
-         if(!position_open)
-         {
-            RemovePositionState(trans.position);
-
-            if(profit < 0.0)
-               g_consecutive_losses++;
-            else
-               g_consecutive_losses = 0;
-
-            PrintFormat("[Trade] Position %I64u closed. Profit=%.2f, ConsecutiveLosses=%d", trans.position, profit, g_consecutive_losses);
-         }
+         if(profit < 0.0)
+            g_consecutive_losses++;
          else
-         {
-            PrintFormat("[Trade] Position %I64u partial close. Realized=%.2f", trans.position, profit);
-         }
+            g_consecutive_losses = 0;
+
+         PrintFormat("[Trade] Position %I64u closed. Profit=%.2f, ConsecutiveLosses=%d", position_id, profit, g_consecutive_losses);
       }
-      else if(entry_type == DEAL_ENTRY_IN)
+      else
       {
-         // Initial state tracking
-         GetPositionState(trans.position, true);
+         PrintFormat("[Trade] Position %I64u partial close. Realized=%.2f", position_id, profit);
       }
+   }
+   else if(entry_type == DEAL_ENTRY_IN)
+   {
+      // Initial state tracking
+      GetPositionStateIndex(position_id, true);
    }
 }
 
@@ -482,7 +485,8 @@ bool DXYFilterAllows()
 int PositionsTotalByMagic()
 {
    int total = 0;
-   for(int i = PositionsTotal() - 1; i >= 0; i--)
+   int positions_total = (int)PositionsTotal();
+   for(int i = positions_total - 1; i >= 0; i--)
    {
       if(!PositionSelectByIndex(i))
          continue;
@@ -771,7 +775,7 @@ double CalculateVolume(double stop_points)
 //+------------------------------------------------------------------+
 void ManageOpenPositions()
 {
-   const int total = PositionsTotal();
+   int total = (int)PositionsTotal();
    for(int i = total - 1; i >= 0; i--)
    {
       if(!PositionSelectByIndex(i))
@@ -985,7 +989,8 @@ void RefreshPanel()
 //+------------------------------------------------------------------+
 void CloseAllPositions()
 {
-   for(int i = PositionsTotal() - 1; i >= 0; i--)
+   int total = (int)PositionsTotal();
+   for(int i = total - 1; i >= 0; i--)
    {
       if(!PositionSelectByIndex(i))
          continue;
@@ -1042,7 +1047,11 @@ double GetDrawdownPercent()
 //+------------------------------------------------------------------+
 bool IsTradeAllowed()
 {
-   if(!TerminalInfoInteger(TERMINAL_TRADE_ALLOWED) || !AccountInfoInteger(ACCOUNT_TRADE_ENABLED))
+   if(!TerminalInfoInteger(TERMINAL_TRADE_ALLOWED) || !MQLInfoInteger(MQL_TRADE_ALLOWED))
+      return(false);
+
+   ENUM_ACCOUNT_TRADE_MODE trade_mode = (ENUM_ACCOUNT_TRADE_MODE)AccountInfoInteger(ACCOUNT_TRADE_MODE);
+   if(trade_mode == ACCOUNT_TRADE_MODE_DISABLED)
       return(false);
 
    if(g_daily_disabled || g_weekly_disabled || g_hard_dd_triggered)
