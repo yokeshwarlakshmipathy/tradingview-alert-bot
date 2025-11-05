@@ -490,7 +490,8 @@ int PositionsTotalByMagic()
 {
    int total = 0;
    int count = (int)PositionsTotal();
-   for(int idx = count - 1; idx >= 0; idx--)
+   int idx;
+   for(idx = count - 1; idx >= 0; idx--)
    {
       if(!PositionSelectByIndex(idx))
          continue;
@@ -780,7 +781,8 @@ double CalculateVolume(double stop_points)
 void ManageOpenPositions()
 {
    int count = (int)PositionsTotal();
-   for(int idx = count - 1; idx >= 0; idx--)
+   int idx;
+   for(idx = count - 1; idx >= 0; idx--)
    {
       if(!PositionSelectByIndex(idx))
          continue;
@@ -994,7 +996,8 @@ void RefreshPanel()
 void CloseAllPositions()
 {
    int count = (int)PositionsTotal();
-   for(int idx = count - 1; idx >= 0; idx--)
+   int idx;
+   for(idx = count - 1; idx >= 0; idx--)
    {
       if(!PositionSelectByIndex(idx))
          continue;
