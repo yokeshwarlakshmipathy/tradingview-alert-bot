@@ -2,68 +2,160 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Guru Prasath V S - Resume</title>
+  <title>Guru Prasath V S | Mechanical Engineer Resume</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    :root {
+      --primary: #1f4e79;
+      --accent: #d0e2f2;
+      --text: #1a1a1a;
+      --muted: #4c5a67;
+      --background: #f5f7fb;
+    }
+    * {
+      box-sizing: border-box;
+    }
     body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      color: #222222;
       margin: 0;
-      padding: 40px 32px;
-      background-color: #ffffff;
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--background);
+    }
+    main {
+      max-width: 900px;
+      margin: 32px auto;
+      background: #ffffff;
+      padding: 48px 56px;
+      box-shadow: 0 12px 32px rgba(26, 33, 45, 0.08);
+      border-radius: 14px;
     }
     header {
-      border-bottom: 2px solid #444444;
-      padding-bottom: 12px;
-      margin-bottom: 24px;
+      text-align: center;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--accent);
     }
     h1 {
-      font-size: 28px;
       margin: 0;
+      font-size: 34px;
+      letter-spacing: 0.02em;
+      color: var(--primary);
+    }
+    .headline {
+      font-size: 16px;
+      color: var(--muted);
+      margin-top: 6px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
     .contact {
-      margin-top: 8px;
-      font-size: 14px;
+      margin-top: 16px;
+      font-size: 15px;
+      color: var(--text);
     }
     .contact a {
-      color: #0a558c;
+      color: var(--primary);
       text-decoration: none;
+      font-weight: 600;
+    }
+    .contact span {
+      margin: 0 8px;
+      color: var(--muted);
     }
     section {
-      margin-bottom: 24px;
+      margin-top: 32px;
     }
     h2 {
-      font-size: 16px;
+      font-size: 18px;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin: 0 0 12px;
-      color: #333333;
+      letter-spacing: 0.12em;
+      margin: 0;
+      color: var(--primary);
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--accent);
+    }
+    p {
+      margin: 12px 0 0;
+      color: var(--text);
+    }
+    ul {
+      margin: 12px 0 0 20px;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .summary-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 16px;
     }
     .item {
-      margin-bottom: 16px;
+      margin-top: 18px;
     }
     .item-header {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      font-weight: bold;
-      margin-bottom: 4px;
+      gap: 8px;
+      font-weight: 600;
+      color: var(--text);
     }
     .item-subheader {
+      margin-top: 4px;
+      color: var(--muted);
       font-style: italic;
-      margin-bottom: 6px;
     }
-    ul {
-      margin: 6px 0 0 20px;
+    .item-metadata {
+      font-weight: 400;
+      color: var(--muted);
     }
-    li {
-      margin-bottom: 6px;
+    .skills-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .skill-group-title {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .skill-chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .skill-chip {
+      padding: 6px 12px;
+      border: 1px solid var(--accent);
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      background: rgba(31, 78, 121, 0.06);
+    }
+    @media (max-width: 640px) {
+      main {
+        padding: 32px 20px;
+        margin: 0;
+        border-radius: 0;
+      }
+      .contact span {
+        display: block;
+        margin: 4px 0;
+      }
+      .skill-chip-list {
+        gap: 8px;
+      }
     }
     @media print {
       body {
-        padding: 16px;
-        color: #000000;
+        background: #ffffff;
+      }
+      main {
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
       }
       a {
         color: inherit;
@@ -72,133 +164,135 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>Guru Prasath V S</h1>
-    <div class="contact">
-      Walajapet, Ranipet district<br>
-      <a href="tel:+916382144870">+91 63821 44870</a> ·
-      <a href="mailto:sivaguru.siva14@gmail.com">sivaguru.siva14@gmail.com</a>
-    </div>
-  </header>
+  <main>
+    <header>
+      <h1>Guru Prasath V S</h1>
+      <div class="headline">Mechanical Engineering Professional</div>
+      <div class="contact">
+        Walajapet, Ranipet district<span>|</span>
+        <a href="tel:+916382144870">+91 63821 44870</a><span>|</span>
+        <a href="mailto:sivaguru.siva14@gmail.com">sivaguru.siva14@gmail.com</a>
+      </div>
+    </header>
 
-  <section>
-    <h2>Professional Summary</h2>
-    <ul>
-      <li>Machine operator with experience supporting precision machining and production workflows at Brakes India Pvt. Ltd.</li>
-      <li>Tool and purchase specialist coordinating tooling requirements for automotive manufacturing at Ashok-Leyland Pvt. Ltd.</li>
-      <li>Competent in documentation, reporting, and data handling using MS Word and MS Excel.</li>
-      <li>Trained in engineering design tools: AutoCAD, CATIA V6 (GSD), SolidWorks, and CREO.</li>
-    </ul>
-  </section>
+    <section>
+      <h2>Professional Summary</h2>
+      <div class="summary-list">
+        <div>Machine operator with hands-on experience delivering precision machining support for automotive components at Brakes India Pvt. Ltd.</div>
+        <div>Tool and purchase specialist coordinating sourcing, inventory control, and vendor alignment at Ashok-Leyland Pvt. Ltd.</div>
+        <div>Proficient in engineering documentation, reporting, and production data management using MS Word and MS Excel.</div>
+        <div>Trained in leading CAD platforms including AutoCAD, CATIA V6 (GSD), SolidWorks, and CREO for design and analysis work.</div>
+      </div>
+    </section>
 
-  <section>
-    <h2>Professional Experience</h2>
-    <div class="item">
-      <div class="item-header">
-        <span>Machine Operator</span>
-        <span>2020 – 2021</span>
+    <section>
+      <h2>Professional Experience</h2>
+      <div class="item">
+        <div class="item-header">
+          <span>Tool &amp; Purchase Associate</span>
+          <span class="item-metadata">Ashok-Leyland Pvt. Ltd · Hosur Plant-1 · 2023 – 2024</span>
+        </div>
+        <ul>
+          <li>Coordinated procurement of tooling, equipment, and consumables to sustain uninterrupted automotive manufacturing operations.</li>
+          <li>Monitored inventory and vendor schedules, aligning cross-functional teams with production targets and maintenance windows.</li>
+          <li>Supported cost tracking and documentation to maintain audit-ready purchasing records and compliance.</li>
+        </ul>
       </div>
-      <div class="item-subheader">Brakes India Pvt. Ltd, Sholinghur</div>
-      <ul>
-        <li>Operated and monitored production machinery to meet automotive component specifications and safety standards.</li>
-        <li>Collaborated with cross-functional teams to improve blade bearing fitment and support timely assembly tasks.</li>
-      </ul>
-    </div>
-    <div class="item">
-      <div class="item-header">
-        <span>Tool &amp; Purchase Associate</span>
-        <span>2023 – 2024</span>
-      </div>
-      <div class="item-subheader">Ashok-Leyland Pvt. Ltd, Hosur Plant-1</div>
-      <ul>
-        <li>Coordinated procurement of tooling, equipment, and consumables for manufacturing operations.</li>
-        <li>Tracked inventory levels and supported teams to maintain uninterrupted production schedules.</li>
-      </ul>
-    </div>
-  </section>
 
-  <section>
-    <h2>Internship</h2>
-    <div class="item">
-      <div class="item-header">
-        <span>Design and Analysis Intern</span>
-        <span>Feb 2020</span>
+      <div class="item">
+        <div class="item-header">
+          <span>Machine Operator</span>
+          <span class="item-metadata">Brakes India Pvt. Ltd · Sholinghur · 2020 – 2021</span>
+        </div>
+        <ul>
+          <li>Operated and calibrated machining equipment to meet tight tolerances for blade bearing components while adhering to safety protocols.</li>
+          <li>Worked with maintenance and engineering teams to resolve equipment issues and improve fitment quality.</li>
+          <li>Documented daily production metrics, equipment adjustments, and quality observations for continuous improvement.</li>
+        </ul>
       </div>
-      <div class="item-subheader">Bharat Heavy Electricals Limited (BHEL), Ranipet</div>
-      <ul>
-        <li>Assisted in the design and analysis of ID fan blade bearing assemblies for power plant applications.</li>
-        <li>Documented improvements to reduce delays in fitting bearing shafts and aligning heavy blades.</li>
-        <li>Partnered with team members to assess bearing fitment and recommend corrective actions.</li>
-      </ul>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <h2>Projects</h2>
-    <div class="item">
-      <div class="item-header">
-        <span>Design and Fabrication of Sowing Machine for Agriculture</span>
+    <section>
+      <h2>Internship</h2>
+      <div class="item">
+        <div class="item-header">
+          <span>Design and Analysis Intern</span>
+          <span class="item-metadata">Bharat Heavy Electricals Limited (BHEL) · Ranipet · Feb 2020</span>
+        </div>
+        <ul>
+          <li>Contributed to the design and analysis of ID fan blade bearing assemblies for power plant systems.</li>
+          <li>Developed recommendations to reduce delays in fitting bearing shafts and aligning heavy blades to improve uptime.</li>
+          <li>Collaborated with senior engineers to assess bearing fitment data and prepare actionable reports.</li>
+        </ul>
       </div>
-      <ul>
-        <li>Developed a manually operated sowing machine with four-wheel mobility to enhance field stability.</li>
-        <li>Utilized wood and cast iron components alongside a chain drive mechanism to optimize durability.</li>
-        <li>Ensured the design minimized environmental impact during field operations.</li>
-      </ul>
-    </div>
-    <div class="item">
-      <div class="item-header">
-        <span>Design and Analysis of Open Coil Helical Spring in Shock Absorber</span>
-      </div>
-      <ul>
-        <li>Evaluated open coil helical spring configurations to support irregular geometries in suspension systems.</li>
-        <li>Addressed material anisotropy and non-homogeneity considerations to maintain reliable damping performance.</li>
-      </ul>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <h2>Education</h2>
-    <div class="item">
-      <div class="item-header">
-        <span>B.E. Mechanical Engineering</span>
-        <span>6.54 CGPA</span>
+    <section>
+      <h2>Key Projects</h2>
+      <div class="item">
+        <div class="item-header">
+          <span>Design and Fabrication of Sowing Machine for Agriculture</span>
+        </div>
+        <ul>
+          <li>Engineered a manually operated four-wheel sowing machine to improve crop row consistency and reduce operator fatigue.</li>
+          <li>Utilized wood and cast iron materials with a chain drive mechanism to balance strength, cost, and durability.</li>
+          <li>Mitigated environmental impact through lightweight construction and low-maintenance component selection.</li>
+        </ul>
       </div>
-      <div class="item-subheader">Panimalar Institute of Technology, Anna University, Chennai</div>
-    </div>
-    <div class="item">
-      <div class="item-header">
-        <span>Integrated Engineering Software (Design Software)</span>
-        <span>6-Month Program</span>
-      </div>
-      <div class="item-subheader">Central Institute of Petrochemical Engineering Technology, Chennai</div>
-    </div>
-  </section>
 
-  <section>
-    <h2>Skills</h2>
-    <div class="item">
-      <div class="item-header">
-        <span>Design Software</span>
+      <div class="item">
+        <div class="item-header">
+          <span>Design and Analysis of Open Coil Helical Spring in Shock Absorber</span>
+        </div>
+        <ul>
+          <li>Analyzed helical spring performance to support irregular geometries in shock absorber systems.</li>
+          <li>Addressed material anisotropy and non-homogeneity to maintain consistent damping characteristics.</li>
+        </ul>
       </div>
-      <ul>
-        <li>AutoCAD</li>
-        <li>CATIA V6 (GSD)</li>
-        <li>SolidWorks</li>
-        <li>CREO</li>
-      </ul>
-    </div>
-    <div class="item">
-      <div class="item-header">
-        <span>Technical &amp; Professional</span>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div class="item">
+        <div class="item-header">
+          <span>B.E. Mechanical Engineering</span>
+          <span class="item-metadata">Panimalar Institute of Technology · Anna University, Chennai</span>
+        </div>
+        <div class="item-subheader">Graduated with 6.54 CGPA</div>
       </div>
-      <ul>
-        <li>MS Word</li>
-        <li>MS Excel</li>
-        <li>GD&amp;T fundamentals</li>
-        <li>Communication and teamwork</li>
-        <li>Independent task ownership</li>
-      </ul>
-    </div>
-  </section>
+      <div class="item">
+        <div class="item-header">
+          <span>Integrated Engineering Software (Design Software)</span>
+          <span class="item-metadata">Central Institute of Petrochemical Engineering Technology, Chennai</span>
+        </div>
+        <div class="item-subheader">6-Month Professional Program</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div>
+          <div class="skill-group-title">Design &amp; Analysis Tools</div>
+          <div class="skill-chip-list">
+            <div class="skill-chip">AutoCAD</div>
+            <div class="skill-chip">CATIA V6 (GSD)</div>
+            <div class="skill-chip">SolidWorks</div>
+            <div class="skill-chip">CREO</div>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-title">Technical &amp; Professional</div>
+          <div class="skill-chip-list">
+            <div class="skill-chip">MS Word</div>
+            <div class="skill-chip">MS Excel</div>
+            <div class="skill-chip">GD&amp;T Fundamentals</div>
+            <div class="skill-chip">Communication &amp; Teamwork</div>
+            <div class="skill-chip">Independent Task Ownership</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
