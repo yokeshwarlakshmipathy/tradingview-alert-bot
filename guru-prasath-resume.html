@@ -23,24 +23,31 @@
       border: 1px solid #000000;
     }
     header {
-      text-align: center;
-      padding-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: flex-end;
       border-bottom: 1px solid #000000;
+      padding-bottom: 14px;
     }
-    h1 {
+    .identity h1 {
       margin: 0;
       font-size: 28px;
-      letter-spacing: 0.03em;
-      color: #000000;
+      letter-spacing: 0.05em;
     }
-    .headline {
+    .identity .headline {
       font-size: 12px;
       margin-top: 4px;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
     }
+    .identity .location {
+      margin-top: 6px;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
     .contact {
-      margin-top: 8px;
+      text-align: right;
       font-size: 12px;
     }
     .contact a {
@@ -48,32 +55,37 @@
       text-decoration: none;
       font-weight: 600;
     }
-    .contact span {
-      margin: 0 6px;
+    .contact .contact-item {
+      margin-top: 4px;
     }
     section {
       margin-top: 18px;
     }
     h2 {
-      font-size: 14px;
+      font-size: 13px;
       text-transform: uppercase;
-      letter-spacing: 0.07em;
+      letter-spacing: 0.12em;
       margin: 0;
-      color: #000000;
-      padding-bottom: 4px;
-      border-bottom: 1px solid #000000;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    h2::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #000000;
     }
     ul {
-      margin: 6px 0 0 16px;
-      padding: 0;
+      margin: 6px 0 0;
+      padding-left: 18px;
     }
     li {
       margin-bottom: 3px;
     }
     .summary-list {
-      margin: 6px 0 0 16px;
-      padding: 0;
-      list-style-type: disc;
+      padding-left: 18px;
+      margin-top: 6px;
     }
     .item {
       margin-top: 10px;
@@ -85,13 +97,21 @@
       gap: 6px;
       font-weight: 600;
     }
+    .item-header .item-role {
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
     .item-metadata {
       font-weight: 400;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
     .skills-inline {
       margin-top: 10px;
       display: grid;
-      gap: 6px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 6px 18px;
     }
     .skills-inline div {
       font-size: 12px;
@@ -159,12 +179,14 @@
   </div>
   <main>
     <header>
-      <h1>Guru Prasath V S</h1>
-      <div class="headline">Mechanical Engineering Professional</div>
+      <div class="identity">
+        <h1>Guru Prasath V S</h1>
+        <div class="headline">Mechanical Engineering Professional</div>
+        <div class="location">Walajapet, Ranipet district</div>
+      </div>
       <div class="contact">
-        Walajapet, Ranipet district<span>|</span>
-        <a href="tel:+916382144870">+91 63821 44870</a><span>|</span>
-        <a href="mailto:sivaguru.siva14@gmail.com">sivaguru.siva14@gmail.com</a>
+        <div class="contact-item"><a href="tel:+916382144870">+91 63821 44870</a></div>
+        <div class="contact-item"><a href="mailto:sivaguru.siva14@gmail.com">sivaguru.siva14@gmail.com</a></div>
       </div>
     </header>
 
@@ -182,7 +204,7 @@
       <h2>Professional Experience</h2>
       <div class="item">
         <div class="item-header">
-          <span>Tool &amp; Purchase Associate</span>
+          <span class="item-role">Tool &amp; Purchase Associate</span>
           <span class="item-metadata">Ashok-Leyland Pvt. Ltd · Hosur Plant-1 · 2023 – 2024</span>
         </div>
         <ul>
@@ -193,7 +215,7 @@
 
       <div class="item">
         <div class="item-header">
-          <span>Machine Operator</span>
+          <span class="item-role">Machine Operator</span>
           <span class="item-metadata">Brakes India Pvt. Ltd · Sholinghur · 2020 – 2021</span>
         </div>
         <ul>
@@ -207,7 +229,7 @@
       <h2>Internship</h2>
       <div class="item">
         <div class="item-header">
-          <span>Design and Analysis Intern</span>
+          <span class="item-role">Design and Analysis Intern</span>
           <span class="item-metadata">Bharat Heavy Electricals Limited (BHEL) · Ranipet · Feb 2020</span>
         </div>
         <ul>
@@ -221,7 +243,7 @@
       <h2>Key Projects</h2>
       <div class="item">
         <div class="item-header">
-          <span>Design and Fabrication of Sowing Machine for Agriculture</span>
+          <span class="item-role">Design and Fabrication of Sowing Machine for Agriculture</span>
         </div>
         <ul>
           <li>Built a manual four-wheel sowing machine to improve row consistency and ease operator workload.</li>
@@ -231,7 +253,7 @@
 
       <div class="item">
         <div class="item-header">
-          <span>Design and Analysis of Open Coil Helical Spring in Shock Absorber</span>
+          <span class="item-role">Design and Analysis of Open Coil Helical Spring in Shock Absorber</span>
         </div>
         <ul>
           <li>Modeled open-coil helical springs for irregular suspension geometries.</li>
@@ -244,13 +266,13 @@
       <h2>Education</h2>
       <div class="item">
         <div class="item-header">
-          <span>B.E. Mechanical Engineering</span>
+          <span class="item-role">B.E. Mechanical Engineering</span>
           <span class="item-metadata">Panimalar Institute of Technology · Anna University, Chennai · 6.54 CGPA</span>
         </div>
       </div>
       <div class="item">
         <div class="item-header">
-          <span>Integrated Engineering Software (Design Software)</span>
+          <span class="item-role">Integrated Engineering Software (Design Software)</span>
           <span class="item-metadata">Central Institute of Petrochemical Engineering Technology, Chennai · 6-Month Program</span>
         </div>
       </div>
