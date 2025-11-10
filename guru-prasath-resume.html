@@ -5,76 +5,59 @@
   <title>Guru Prasath V S | Mechanical Engineer Resume</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
     }
     body {
       margin: 0;
       font-family: "Segoe UI", Arial, sans-serif;
       font-size: 13px;
-      line-height: 1.4;
+      line-height: 1.45;
       color: #000000;
       background: #ffffff;
     }
     main {
-      max-width: 780px;
+      max-width: 760px;
       margin: 18px auto 28px;
-      padding: 22px 28px 28px;
+      padding: 26px 32px 28px;
       border: 1px solid #000000;
     }
     header {
-      display: flex;
-      justify-content: space-between;
-      gap: 24px;
-      align-items: flex-end;
-      border-bottom: 1px solid #000000;
+      text-align: center;
       padding-bottom: 14px;
+      border-bottom: 1px solid #000000;
     }
-    .identity h1 {
+    header h1 {
       margin: 0;
-      font-size: 28px;
-      letter-spacing: 0.05em;
+      font-size: 30px;
+      letter-spacing: 0.02em;
     }
-    .identity .headline {
-      font-size: 12px;
-      margin-top: 4px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    .identity .location {
+    header .headline {
       margin-top: 6px;
-      font-size: 12px;
-      letter-spacing: 0.04em;
+      font-size: 13px;
+      font-weight: 600;
     }
-    .contact {
-      text-align: right;
+    header .meta {
+      margin-top: 8px;
       font-size: 12px;
     }
-    .contact a {
+    header .meta span {
+      display: inline-block;
+      margin: 0 6px;
+    }
+    header .meta a {
       color: #000000;
       text-decoration: none;
       font-weight: 600;
-    }
-    .contact .contact-item {
-      margin-top: 4px;
     }
     section {
       margin-top: 18px;
     }
     h2 {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    h2::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: #000000;
+      font-size: 14px;
+      margin: 0 0 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #000000;
     }
     ul {
       margin: 6px 0 0;
@@ -97,15 +80,13 @@
       gap: 6px;
       font-weight: 600;
     }
-    .item-header .item-role {
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+    .item-role {
+      font-size: 13px;
     }
     .item-metadata {
       font-weight: 400;
       font-size: 12px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      color: #333333;
     }
     .skills-inline {
       margin-top: 10px;
@@ -148,10 +129,6 @@
         justify-content: center;
         margin: 12px 0;
       }
-      .contact span {
-        display: block;
-        margin: 4px 0;
-      }
     }
     @page {
       size: A4;
@@ -179,14 +156,12 @@
   </div>
   <main>
     <header>
-      <div class="identity">
-        <h1>Guru Prasath V S</h1>
-        <div class="headline">Mechanical Engineering Professional</div>
-        <div class="location">Walajapet, Ranipet district</div>
-      </div>
-      <div class="contact">
-        <div class="contact-item"><a href="tel:+916382144870">+91 63821 44870</a></div>
-        <div class="contact-item"><a href="mailto:sivaguru.siva14@gmail.com">sivaguru.siva14@gmail.com</a></div>
+      <h1>Guru Prasath V S</h1>
+      <div class="headline">Mechanical Engineering Professional</div>
+      <div class="meta">
+        Walajapet, Ranipet district<span>|</span>
+        <a href="tel:+916382144870">+91 63821 44870</a><span>|</span>
+        <a href="mailto:sivaguru.siva14@gmail.com">sivaguru.siva14@gmail.com</a>
       </div>
     </header>
 
