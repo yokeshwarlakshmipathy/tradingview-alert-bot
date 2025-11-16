@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>YOKESHWAR L — Software Development Engineer Intern</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="Resume of YOKESHWAR L, software development engineer intern experienced in full-stack AI projects and actively upskilling on Scala, Spark, Hadoop, Kafka, Jenkins, Ansible, and Control-M for network flow roles.">
+  <meta name="keywords" content="Software Development Engineer Intern, Scala, Spark, Shell, SQL, Hadoop, Kafka, Jenkins, Ansible, Control-M, Agile, Network Flow, Bangalore, Full Stack">
+  <style>
+    :root {
+      --text-primary: #111;
+      --text-secondary: #444;
+      --muted: #666;
+      --line: #000;
+      --background: #fff;
+      --page-bg: #f3f3f3;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      color: var(--text-primary);
+      background: var(--page-bg);
+      line-height: 1.32;
+      font-size: 9.6pt;
+    }
+    @page { size: A4; margin: 8mm 10mm 8mm 10mm; }
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .resume-wrapper {
+      max-width: 780px;
+      margin: 6mm auto 2mm;
+      background: var(--background);
+      border: 1px solid var(--line);
+      padding: 14px 16px 6px;
+    }
+    header {
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 12px;
+    }
+    header .identity { flex: 1 1 260px; }
+    header h1 { margin: 0; font-size: 17pt; letter-spacing: 0.3px; }
+    header p {
+      margin: 2px 0 0;
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 9.2pt;
+    }
+    header .actions {
+      flex: 0 0 auto;
+      display: flex;
+      gap: 8px;
+    }
+    .print-button {
+      padding: 7px 14px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--text-primary);
+      font-weight: 600;
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 9pt;
+    }
+    .print-button:hover,
+    .print-button:focus {
+      background: var(--text-primary);
+      color: #fff;
+    }
+    main { padding: 12px 0 4px; }
+    .layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 16px;
+    }
+    aside.sidebar {
+      padding-right: 14px;
+      border-right: 1px solid var(--line);
+    }
+    aside section { margin-bottom: 14px; }
+    aside section:last-child { margin-bottom: 0; }
+    aside h2,
+    .content h2 {
+      font-size: 9.2pt;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin: 0 0 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--line);
+    }
+    ul.contact-list,
+    ul.info-list,
+    ul.bullet-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    ul.contact-list li,
+    ul.info-list li { margin-bottom: 6px; font-size: 9.1pt; }
+    ul.info-list li strong {
+      display: block;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    ul.info-list li span {
+      color: var(--muted);
+      font-size: 8.9pt;
+    }
+    .content section { margin-bottom: 16px; }
+    .content section:last-child { margin-bottom: 0; }
+    .content p {
+      margin: 0 0 6px;
+      color: var(--text-secondary);
+      font-size: 9.2pt;
+    }
+    ul.bullet-list {
+      list-style: disc;
+      padding-left: 16px;
+    }
+    ul.bullet-list li {
+      margin-bottom: 3px;
+      color: var(--text-primary);
+      font-size: 9.1pt;
+    }
+    .role-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 4px 10px;
+      margin-bottom: 3px;
+    }
+    .role-header h3 { margin: 0; font-size: 9.4pt; }
+    .role-header span { color: var(--muted); font-size: 8.9pt; }
+    .education-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .education-item { margin-bottom: 11px; }
+    .education-item:last-child { margin-bottom: 0; }
+    .education-item h3 { margin: 0; font-size: 9.4pt; }
+    .education-item p {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 8.9pt;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:hover,
+    a:focus { text-decoration: underline; }
+    @media (max-width: 820px) {
+      html, body { font-size: 9.8pt; }
+      .resume-wrapper { margin: 6mm auto; padding: 14px; }
+      .layout { grid-template-columns: 1fr; gap: 14px; }
+      aside.sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+        padding-right: 0;
+        padding-bottom: 12px;
+      }
+      header { justify-content: space-between; }
+    }
+    @media print {
+      body { background: var(--background); }
+      .resume-wrapper { margin: 0; border: none; padding: 0; }
+      header { padding-bottom: 8px; }
+      main { padding: 10px 0 2px; }
+      .layout { grid-template-columns: 215px 1fr; gap: 12px; }
+      aside.sidebar {
+        padding-right: 12px;
+        border-right: 1px solid var(--line);
+      }
+      .print-button { display: none; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "YOKESHWAR L",
+    "email": "mailto:yokeshlakshmipathy@gmail.com",
+    "telephone": "+91 94442 16431",
+    "sameAs": [
+      "https://www.linkedin.com/in/yokeshwar-l-209376196/",
+      "https://github.com/yokeshwarlakshmipathy"
+    ],
+    "alumniOf": [
+      {
+        "@type": "EducationalOrganization",
+        "name": "Meenakshi College of Engineering, Chennai",
+        "degree": "MCA (Computer Applications)",
+        "startDate": "2022",
+        "endDate": "2024"
+      },
+      {
+        "@type": "EducationalOrganization",
+        "name": "Guru Nanak College, Chennai",
+        "degree": "BCA (Computer Applications)",
+        "startDate": "2019",
+        "endDate": "2022"
+      }
+    ],
+    "skills": [
+      "Java",
+      "Python",
+      "Django",
+      "Scala (learning)",
+      "Spark (coursework)",
+      "Shell scripting",
+      "SQL",
+      "Hadoop fundamentals",
+      "Kafka basics",
+      "Jenkins labs",
+      "Ansible basics",
+      "Control-M awareness"
+    ],
+    "hasPart": {
+      "@type": "Resume",
+      "name": "Professional Resume of YOKESHWAR L",
+      "about": [
+        "Full-stack AI products",
+        "Octoflow-aligned learning path",
+        "Agile SDLC"
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+  <div class="resume-wrapper">
+    <header>
+      <div class="identity">
+        <h1>YOKESHWAR L</h1>
+        <p>Software Development Engineer Intern</p>
+        <p style="margin-top:4px; font-size:9.2pt; color:#444;">
+          Entry-level Software Engineer with strong foundations in Java, Python, SQL, data pipelines, and backend development. Hands-on exposure to Spark, Hadoop, Kafka, PostgreSQL, Agile SDLC, API development, and automation scripting. Eager to contribute to large-scale data engineering projects like flow mapping, ingestion systems, and backend services.
+        </p>
+      </div>
+      <div class="actions">
+        <button type="button" class="print-button" aria-label="Download or print the resume">Download as PDF / Print</button>
+      </div>
+    </header>
+    <main>
+      <div class="layout">
+        <aside class="sidebar" role="complementary">
+          <section aria-labelledby="contact-heading">
+            <h2 id="contact-heading">Contact</h2>
+            <ul class="contact-list">
+              <li><strong>Phone</strong> <a href="tel:+919444216431">+91 94442 16431</a></li>
+              <li><strong>Email</strong> <a href="mailto:yokeshlakshmipathy@gmail.com">yokeshlakshmipathy@gmail.com</a></li>
+              <li><strong>LinkedIn</strong> <a href="https://www.linkedin.com/in/yokeshwar-l-209376196/" rel="nofollow noopener">LinkedIn</a></li>
+              <li><strong>GitHub</strong> <a href="https://github.com/yokeshwarlakshmipathy" rel="nofollow noopener">GitHub</a></li>
+            </ul>
+          </section>
+
+          <section aria-labelledby="skills-heading">
+            <h2 id="skills-heading">Technical Skills</h2>
+            <ul class="info-list">
+              <li>
+                <strong>Languages</strong>
+                <span>Java, Python, JavaScript, SQL, Scala (learning), Shell scripting</span>
+              </li>
+              <li>
+                <strong>Web Technologies</strong>
+                <span>HTML5, CSS3, Bootstrap, Django</span>
+              </li>
+              <li>
+                <strong>Databases</strong>
+                <span>PostgreSQL, Oracle SQL, Hive (basics), JDBC</span>
+              </li>
+              <li>
+                <strong>AI & Data Processing</strong>
+                <span>PDFPlumber, OpenAI API, Chatbot Development, RAG, Spark Structured APIs (coursework), Hadoop fundamentals, Kafka streaming basics</span>
+              </li>
+              <li>
+                <strong>Tools & Platforms</strong>
+                <span>Git, GitHub, Jenkins labs, Ansible basics, Control-M awareness, Eclipse, IntelliJ, VS Code</span>
+              </li>
+            </ul>
+          </section>
+
+          <section aria-labelledby="learning-heading">
+            <h2 id="learning-heading">Learning Focus</h2>
+            <ul class="info-list">
+              <li>
+                <strong>Network Flow Platforms</strong>
+                <span>Studying Octoflow documentation, IPAM/DNS APIs, and data-access controls to support mapping & certification use cases.</span>
+              </li>
+              <li>
+                <strong>Agile & SDLC</strong>
+                <span>Participating in daily standups, backlog refinement, sprint reviews, and acceptance-criteria walkthroughs.</span>
+              </li>
+              <li>
+                <strong>CI/CD Automation</strong>
+                <span>Building sample Jenkins pipelines, shell scripts, and Control-M job chains to automate tests and release validations.</span>
+              </li>
+            </ul>
+          </section>
+
+          <section aria-labelledby="relevant-heading">
+            <h2 id="relevant-heading">Relevant Skills for Data Engineering & Big Data</h2>
+            <ul class="info-list">
+              <li>
+                <strong>Big Data Technologies</strong>
+                <span>Basics of Spark, Hadoop, Kafka, Hive, Data Pipelines</span>
+              </li>
+              <li>
+                <strong>Programming</strong>
+                <span>Java, Python, SQL, Shell (Beginner)</span>
+              </li>
+              <li>
+                <strong>Data Processing</strong>
+                <span>ETL concepts, API-based ingestion, Data mapping & validation</span>
+              </li>
+              <li>
+                <strong>Databases</strong>
+                <span>PostgreSQL, Hive, Oracle SQL, Starburst (familiar)</span>
+              </li>
+              <li>
+                <strong>CI/CD</strong>
+                <span>Jenkins (basic), Automation scripting, Version control using Git</span>
+              </li>
+              <li>
+                <strong>Methodologies</strong>
+                <span>Agile, Sprint planning, Collaborative development</span>
+              </li>
+            </ul>
+          </section>
+
+          <section aria-labelledby="certifications-heading">
+            <h2 id="certifications-heading">Certifications</h2>
+            <ul class="info-list">
+              <li>
+                <strong>Java Full Stack Development</strong>
+                <span>JSpiders, Bangalore — Ongoing</span>
+              </li>
+              <li>
+                <strong>Software Engineer Intern Certification</strong>
+                <span>HackerRank — May 2025</span>
+              </li>
+              <li>
+                <strong>SQL and Relational Databases 101</strong>
+                <span>IBM CognitiveClass.ai — Oct 2024</span>
+              </li>
+            </ul>
+          </section>
+        </aside>
+
+        <section class="content">
+          <section aria-labelledby="experience-heading">
+            <h2 id="experience-heading">Work Experience</h2>
+            <article>
+              <div class="role-header">
+                <h3>Software Developer Intern — ChipWave (Tm)</h3>
+                <span>Bengaluru, Karnataka, India · On-site | Aug 2025 – Present</span>
+              </div>
+              <ul class="bullet-list">
+                <li>Contribute to end-to-end development of backend modules involving data ingestion, validation, and API integration — closely aligned with Agile SDLC practices.</li>
+                <li>Worked with relational databases such as PostgreSQL to design schemas, optimize queries, and maintain data integrity across pipeline components.</li>
+                <li>Developed clean, reusable, and test-driven code following software craftsmanship principles and internal coding standards.</li>
+                <li>Collaborated with cross-functional teams to define APIs, data rules, and access patterns for scalable data-driven workflows.</li>
+                <li>Implemented automated test scenarios, release validation steps, and defect reports ensuring bug-free deployments.</li>
+                <li>Actively participated in daily standups, sprint ceremonies, and documentation of feature specifications, test cases, and development progress.</li>
+                <li>Contributed to building internal automation scripts and tooling for improving CI/CD efficiency and development workflows.</li>
+              </ul>
+            </article>
+          </section>
+
+          <section aria-labelledby="projects-heading">
+            <h2 id="projects-heading">Projects</h2>
+            <article>
+              <div class="role-header">
+                <h3>AI-Powered Document Processing System — ChipWave (Internal Project)</h3>
+                <span>Project — 2025</span>
+              </div>
+              <ul class="bullet-list">
+                <li>Built backend data-ingestion components that extract, clean, and map document data using Python and SQL.</li>
+                <li>Designed REST APIs for structured data access, validation workflows, and rule-based processing.</li>
+                <li>Implemented modular, reusable code with a strong focus on clean code, performance, and maintainability.</li>
+                <li>Developed automated scripts for validating releases, testing workflows, and reporting defects.</li>
+                <li>Worked closely with senior developers to translate business requirements into technical artifacts and deliver quick iterations.</li>
+              </ul>
+            </article>
+            <article>
+              <div class="role-header">
+                <h3>Animal Detection for Railway Safety Using Computer Vision</h3>
+                <span>Academic Project — Aug 2024</span>
+              </div>
+              <ul class="bullet-list">
+                <li>Developed a real-time animal detection system to prevent railway collisions.</li>
+                <li>Implemented YOLOv8 in MATLAB for accurate object detection on railway tracks.</li>
+                <li>Integrated IoT with NodeMCU for real-time alerts to train personnel and authorities.</li>
+                <li>Automated train speed adjustment upon detection to enhance safety.</li>
+                <li>Prepared validation test plans, defect logs, and SQL-style data dictionaries for safety reporting.</li>
+              </ul>
+            </article>
+            <article>
+              <div class="role-header">
+                <h3>Ludo Game Development Using Java</h3>
+                <span>Mini Project — Apr 2022</span>
+              </div>
+              <ul class="bullet-list">
+                <li>Applied OOP principles, clean code structure, and modular design to build an interactive Java-based Ludo game.</li>
+                <li>Implemented event-driven architecture, rule engines, and structured data models using Java Swing and core APIs.</li>
+                <li>Followed iterative development with version control, testing, and debugging practices.</li>
+              </ul>
+            </article>
+          </section>
+
+          <section aria-labelledby="education-heading">
+            <h2 id="education-heading">Education</h2>
+            <div class="education-list">
+              <div class="education-item">
+                <h3>Meenakshi College of Engineering, Chennai</h3>
+                <p>MCA — Computer Applications | CGPA: 7.92 | 2022 – 2024</p>
+              </div>
+              <div class="education-item">
+                <h3>Guru Nanak College, Chennai</h3>
+                <p>BCA — Computer Applications | CGPA: 7.80 | 2019 – 2022</p>
+              </div>
+            </div>
+          </section>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const button = document.querySelector('.print-button');
+      if (button) {
+        const handlePrint = function () { window.print(); };
+        button.addEventListener('click', handlePrint);
+        button.addEventListener('keyup', function (event) {
+          if (event.key === 'Enter' || event.key === ' ') { handlePrint(); }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
